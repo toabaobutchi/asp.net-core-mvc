@@ -1,4 +1,4 @@
-# ASP.NET Core MVC - Chapter 0
+# ASP.NET Core MVC - Chapter 1: Controller và View
 
 *Tài liệu được thực hiện trong Visual Studio 2022 cùng với phiên bản .NET 7.0*
 
