@@ -70,14 +70,41 @@ Tham số `htmlAttributes` thường nhận một *đối tượng ẩn danh* (A
 
 **Ví dụ:**
 ```csharp, html
-	@Html.ActionLink("Home page", "Index", "Home", null, 
-		new { 
-			@class = "btn btn-success", 
-			title = "Go to Home page"
-		}
-	)
-	<! -- tương tự -->
-	<a href="~/Home/Index" class="btn btn-success" title="Go to Home page"> Home page </a>
+    @Html.ActionLink("Home page", "Index", "Home", null,
+        new { 
+            @class = "btn btn-success", 
+            title = "Go to Home page"
+        }
+    )
+    <! -- tương tự -->
+    <a href="~/Home/Index" class="btn btn-success" title="Go to Home page"> Home page </a>
 ```
 **Lưu ý:** Thuộc tính HTML `class` sẽ biểu diễn thành `@class` để tránh xung đột với từ khóa `class` trong C#.
 `Html.ActionLink()` là một trong các phương thức của `IHtmlHelper`, thứ thường được dùng trong ASP.NET MVC (.NET Framework).
+
+## Chuyển hướng phía máy chủ
+Một số các hành vi chuyển hướng phải được thực hiện nội bộ và chủ động từ phía máy chủ tùy vào từng hành vi của người dùng.
+
+**Ví dụ:**
+
+> Để vào trang Thông tin khách hàng, người dùng sẽ ấn vào liên kết đến trang. Tuy nhiên nếu khách hàng chưa đăng nhập thì sẽ phải chuyển đến trang Đăng nhập/Đăng ký.
+>
+> Ngược lại sẽ hiển thị trang Thông tin khách hàng. Việc chuyển hướng có điều kiện như vậy không thể hiện thực nếu chỉ sử dụng cách chuyển hướng ở phía người dùng với siêu liên kết, mà phải được xử lý ở máy chủ.
+
+Để chuyển hướng ở máy chủ, ta sử dụng một trong 2 phương thức sau:
+
+* **`RedirectResult Redirect(string url)`**: chuyển hướng theo `url` chỉ định, có thể là trang web bên ngoài.
+* **`RedirectToActionResult RedirectToAction(string action, string controller)`**: chuyển hướng xử lý đến `action`. Bỏ qua tham số `controller` nếu như action hiện tại và action cần chuyển hướng có cùng controller.
+
+Xem thêm các cú pháp khác của phương thức `RedirectToAction()` tại [đây](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-7.0).
+
+**Ví dụ:**
+```csharp
+    public IActionResult Index() {
+	    return View();
+    }
+    public IActionResult GoToIndex() {
+	    return RedirectToAction("Index"); // chuyển hướng đến Action 'Index'
+    }
+```
+Kiểu trả về `RedirectResult` và `RedirectToActionResult` đều là các kiểu dẫn xuất của `IActionResult`.
