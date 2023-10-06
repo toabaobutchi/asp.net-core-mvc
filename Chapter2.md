@@ -60,3 +60,24 @@ Cú pháp đơn giản nhất của phương thức `Html.ActionLink()` bao gồ
     <! -- tương tự -->
     <a href="~/Home/Privacy"> Privacy page </a>
 ```
+Một cú pháp khác của phương thức `Html.ActionLink()` cho phép chỉ định các thuộc tính HTML như `class`, `style`, `id`, `title`, ...
+```csharp
+    Html.ActionLink(linkText, action, controller, object routeValues, object htmlAttributes)
+```
+Sẽ có một tài liệu đề cập chi tiết về cách truyền giá trị cho tham số `routeValues`, vì vậy hiện tại sẽ sử dụng giá trị `null` cho tham số này.
+
+Tham số `htmlAttributes` thường nhận một *đối tượng ẩn danh* (Anonymous Object) chứa các thuộc tính trùng tên với thuộc tính HTML.
+
+**Ví dụ:**
+```csharp, html
+	@Html.ActionLink("Home page", "Index", "Home", null, 
+		new { 
+			@class = "btn btn-success", 
+			title = "Go to Home page"
+		}
+	)
+	<! -- tương tự -->
+	<a href="~/Home/Index" class="btn btn-success" title="Go to Home page"> Home page </a>
+```
+**Lưu ý:** Thuộc tính HTML `class` sẽ biểu diễn thành `@class` để tránh xung đột với từ khóa `class` trong C#.
+`Html.ActionLink()` là một trong các phương thức của `IHtmlHelper`, thứ thường được dùng trong ASP.NET MVC (.NET Framework).
