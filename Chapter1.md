@@ -6,6 +6,7 @@
 Trong ASP.NET Core MVC, Controller được dùng để truy vấn, xử lý và truyền dữ liệu cho Model hoặc View.
 
 Controller là các lớp dẫn xuất từ lớp `Microsoft.AspNetCore.Mvc.Controller` chứa các phương thức gọi là các **Action** hay **Action method**. Các controller được tạo trong thư mục **Controllers**.
+
 Khi một project được tạo ra, một controller mặc định được tạo ra với tên là `HomeController` với nội dung như sau:
 ```csharp
 public class HomeController : Controller
