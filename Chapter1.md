@@ -36,7 +36,7 @@ public class HomeController : Controller
     }
 }
 ```
-Lớp `HomeController` chứa nhiều thành viên, nhưng ở mức độ cơ bản ta sẽ quan tâm đến 2 Action: `Index` và `Privacy`. Ngoài ra phương thức `Error` cũng là một action, nhưng hiện tại ta không cần quan tâm đến.
+Lớp `HomeController` chứa nhiều thành viên, nhưng ở mức độ cơ bản ta sẽ quan tâm đến 2 action: `Index` và `Privacy`. Ngoài ra phương thức `Error` cũng là một action, nhưng hiện tại ta không cần quan tâm đến.
 
 Các action thường là trả về kiểu `IActionResult`, nhưng vẫn có thể trả về các kiểu dữ liệu khác như `string`, `int`, `double`, ...
 
@@ -46,6 +46,8 @@ Các action sử dụng phương thức `View()` để chuyển đến trang gia
 
 * Action `Index` của `HomeController` sẽ trỏ về trang `~/Views/Home/Index.cshtml`.
 * Action `Privacy` của `HomeController` sẽ trỏ về trang `~/Views/Home/Privacy.cshtml`.
+
+Tóm lại, tất cả các phương thức `public` trong lớp controller đều là các action - trừ một số trường hợp cấu hình lại.
 
 ## Thêm Controller mới
 Các controller trong ASP.NET Core MVC đều được tạo trong thư mục **Controllers**.
