@@ -92,9 +92,10 @@ Một số các hành vi chuyển hướng phải được thực hiện nội b
 > Ngược lại sẽ hiển thị trang Thông tin khách hàng. Việc chuyển hướng có điều kiện như vậy không thể hiện thực nếu chỉ sử dụng cách chuyển hướng ở phía người dùng với siêu liên kết, mà phải được xử lý ở máy chủ.
 
 Để chuyển hướng ở máy chủ, ta sử dụng một trong 2 phương thức sau:
-
-* **`RedirectResult Redirect(string url)`**: chuyển hướng theo `url` chỉ định, có thể là trang web bên ngoài.
-* **`RedirectToActionResult RedirectToAction(string action, string controller)`**: chuyển hướng xử lý đến `action`. Bỏ qua tham số `controller` nếu như action hiện tại và action cần chuyển hướng có cùng controller.
+| Phương thức | Mô tả |
+| --- | --- |
+|**`RedirectResult Redirect(string url)`**| Chuyển hướng theo `url` chỉ định, có thể là trang web bên ngoài.|
+|**`RedirectToActionResult RedirectToAction(string action, string controller)`**| Chuyển hướng xử lý đến `action`. Bỏ qua tham số `controller` nếu như action hiện tại và action cần chuyển hướng có cùng controller.|
 
 Xem thêm các cú pháp khác của phương thức `RedirectToAction()` tại [đây](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-7.0).
 
