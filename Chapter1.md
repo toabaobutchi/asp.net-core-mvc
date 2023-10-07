@@ -10,31 +10,31 @@ Controller là các lớp dẫn xuất từ lớp `Microsoft.AspNetCore.Mvc.Cont
 
 Khi một project được tạo ra, một controller mặc định được tạo ra với tên là `HomeController` với nội dung như sau:
 ```csharp
-public class HomeController : Controller
-{
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        public IActionResult Index()
+        {
+            return View();
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
-}
 ```
 Lớp `HomeController` chứa nhiều thành viên, nhưng ở mức độ cơ bản ta sẽ quan tâm đến 2 action: `Index` và `Privacy`. Ngoài ra phương thức `Error` cũng là một action, nhưng hiện tại ta không cần quan tâm đến.
 
