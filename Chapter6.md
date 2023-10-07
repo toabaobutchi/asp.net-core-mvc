@@ -53,7 +53,7 @@ Với các phương thức liên quan đến đường dẫn như `Url.ActionLin
 **Ví dụ:**
 ```html
     @Html.ActionLink("Get result", "Sum", "Home", new { a = 10, b = 20 })
-    @* Nội dung HTML nhận được *@
+    <!-- Nội dung HTML nhận được -->
     <a href="/Home/Sum?a=10&b=20"> Get result </a>
 ```
 Nội dung về ***Route Values*** sẽ được trình bày ở [Chapter 7]().
