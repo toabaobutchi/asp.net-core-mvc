@@ -1,4 +1,4 @@
-# ASP.NET Core MVC - Chapter 3
+# ASP.NET Core MVC - Chapter 3: Cú pháp Razor
 
 ## Sơ lược về Razor
 
@@ -93,9 +93,9 @@ Các cú pháp điều khiển như `if`, `switch`, `for`, `while`, ... đều �
 
 **Ví dụ:**
 ```csharp
-	@{
-		int num = 19;
-	}
+  @{
+    int num = 19;
+  }
   @if(num <= 15) {
     num++;
   }
@@ -103,3 +103,23 @@ Các cú pháp điều khiển như `if`, `switch`, `for`, `while`, ... đều �
     num--;
   }
 ```
+**Lưu ý:** Khối lệnh `else` và `else if` không cần chỉ định với ký tự Razor `@`. Một số trường hợp có thể bỏ qua ngoặc `{ }` của cú pháp lệnh.
+
+## Razor Comments
+Trang Razor hỗ trợ cả cú pháp Comment của C# và HTML.
+
+**Ví dụ:**
+```csharp, html
+  @{
+    /* C# Comment */
+    // C# Comment
+  }
+  <! -- HTML Comment -->
+```
+Bên cạnh đó, trang Razor còn cung cấp một cú pháp Comment riêng bao quanh bởi `@*` và `*@`.
+
+## Các cú pháp Razor khác
+
+Tài liệu này chỉ giới thiệu các cú pháp Razor thường dùng và phổ biến nhất. Các cú pháp Razor khác sẽ được nhắc đến khi các vấn đề liên quan được nhắc đến.
+
+Xem thêm các cú pháp Razor khác tại: [Razor syntax reference for ASP.NET Core | Microsoft Learn](https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-7.0)
