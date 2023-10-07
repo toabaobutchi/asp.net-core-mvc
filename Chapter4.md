@@ -19,7 +19,8 @@ Viewmodel thường được dùng để truyền một đối tượng, một d
 
 **Ví dụ:**
 ```csharp
-  public IActionResult Index() {
+  public IActionResult Index()
+  {
     List<string> names = new List<string>() { "Harry", "Bob", "John", "Mary" };
     return View(names); // truyền danh sách 'names' sang cho View
   }
@@ -32,7 +33,7 @@ Viewmodel thường được dùng để truyền một đối tượng, một d
 Chỉ thị `@model` thường sẽ đặt ở đầu trang View. Chỉ thị này được dùng để khai báo dữ liệu nhận từ Controller có kiểu dữ liệu là gì.
 
 Nếu `<kiểu dữ liệu>` là kiểu do lập trình viên định nghĩa (User-defined Datatype), ta phải chỉ định đầy đủ tên của kiểu bao gồm: Tên project, tên các namespace và tên kiểu dữ liệu. 
-Mặc dù vậy, trong một số tình huống Visual Stuido có thể tự nhận biết hoặc gợi ý sử dụng.
+Mặc dù vậy, trong một số tình huống Visual Studio có thể tự nhận biết hoặc gợi ý sử dụng.
 
 **Ví dụ:**
 ```csharp
@@ -104,7 +105,77 @@ Do lưu giá trị kiểu `object`, nên giá trị của các kiểu dữ liệ
 ```
 * View:
 ```html
-  @{ var emp = (WebApp.Models.Employee)ViewData["Emp"]; }
+  @{
+    var emp = (WebApp.Models.Employee)ViewData["Emp"];
+  }
   <p> Name: @emp.Name </p>
   <p> Salary: @emp.Salary</p>
 ```
+Bên cạnh việc sử dụng `ViewData`, ta có thể sử dụng attribute `[ViewData]` cho thuộc tính của lớp Controller. Thuộc tính có chỉ định `[ViewData]` có thể dùng như `ViewData`, lưu dữ liệu và truyền sang trang View.
+
+**Ví dụ:**
+```csharp
+  public class HomeController : Controller
+  {
+    [ViewData]
+    public string Name { get; set; } // tương đương với ViewData["Name"]
+    public IActionResult Index()
+    {
+      Name = "Harry";
+      return View();
+    }
+  }
+```
+Ở các trang View, ta vẫn gọi các thuộc tính có chỉ định attribute `[ViewData]` bằng đối tượng `ViewData`. Tên thuộc tính sẽ là tên khóa.
+```html
+  <p> @ViewData["Name"] </p>
+```
+
+### ViewBag
+`ViewBag` là một đối tượng kiểu `DynamicViewData`, có thể truy cập vào các đối tượng của `ViewData`. `ViewBag` trở nên tiện lợi hơn `ViewData` vì dữ liệu được lưu trữ và truyền đi với kiểu `dynamic` – một kiểu dữ liệu không yêu cầu ép kiểu khi sử dụng.
+
+`ViewBag` hỗ trợ cú pháp sử dụng và truy cập tương tự `ViewData`, nhưng ngoài ra còn một cú pháp khác dành riêng cho `ViewBag`. Tên khóa sẽ dùng như thuộc tính thông qua dấu `.`, cụ thể:
+```csharp
+  ViewBag.name = value;
+```
+Trong đó, `name` là một định danh bất kỳ tuân theo quy tắc đặt tên biến của C#.
+
+**Ví dụ:**
+* Sử dụng `ViewBag` giống như `ViewData`:
+```csharp
+  public IActionResult Index() {
+    ViewBag.Message = "I learn ASP.NET Core";
+    ViewBag["Website"] = "https://learn.microsoft.com"; // cú pháp ViewData
+    return View();
+  }
+```
+* Và gọi ở trang View:
+```html
+  <p> @ViewBag.Message </p>
+  <a href="@ViewBag["Website"]"> My Website </a>
+```
+Giá trị mà `ViewBag` lưu trữ không cần phải thông qua ép kiểu, thậm chí với các kiểu dữ liệu do lập trình viên định nghĩa.
+
+**Ví dụ:**
+* Controller:
+```csharp
+  ViewBag.Student = new Student() { Id = 1, Name = "Bruce" };
+```
+* View:
+```html
+  <!-- Gọi thuộc tính của đối tượng không cần ép kiểu -->
+  <p> @ViewBag.Student.Name </p>
+```
+Đối tượng `ViewBag` và `ViewData` sử dụng chung một dữ liệu nguồn `ViewData`. Do đó ta có thể sử dụng đồng thời cả `ViewBag` và `ViewData`. Bên cạnh đó, `ViewData` có thể truy cập đến dữ liệu mà `ViewBag` lưu trữ và ngược lại.
+
+**Ví dụ:**
+* Controller:
+```csharp
+  ViewBag.Message = "This is message";
+```
+* View:
+```html
+  <!-- Gọi ra giá trị của ViewBag bằng ViewData vì chúng sử dụng cùng nguồn dữ liệu -->
+  <p> @ViewData["Message"] </p>
+```
+**Lưu ý:** Dữ liệu của `ViewBag` và `ViewData` đều không thể truyền sang trang View nếu có thao tác chuyển hướng - Redirect.
