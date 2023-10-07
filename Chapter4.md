@@ -143,7 +143,8 @@ Trong đó, `name` là một định danh bất kỳ tuân theo quy tắc đặt
 **Ví dụ:**
 * Sử dụng `ViewBag` giống như `ViewData`:
 ```csharp
-  public IActionResult Index() {
+  public IActionResult Index()
+  {
     ViewBag.Message = "I learn ASP.NET Core";
     ViewBag["Website"] = "https://learn.microsoft.com"; // cú pháp ViewData
     return View();
