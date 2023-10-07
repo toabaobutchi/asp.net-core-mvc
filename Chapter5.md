@@ -22,26 +22,34 @@ Cũng vì hành vi mặc định của `View()`, ta thường được khuyến 
 Tuy nhiên, ta cũng có thể chỉ định tên của trang view cần trả về với cú pháp sau:
 
 ```csharp
-  View(string? viewName)
+    View(string? viewName)
 ```
 Do đó, nếu vì một lý do nào đó mà trang view không trùng tên với action hoặc muốn chuyển tiếp đến một trang view khác, ta có thể sử dụng cú pháp trên.
 
 **Ví dụ:**
 ```csharp
-	public IActionResult Index()
-	{
-		return View("About");
-	}
+    public IActionResult Index()
+    {
+        return View("About");
+    }
 ```
 Nếu muốn chuyển đến trang View khác thư mục với controller hiện tại, ta có thể sử dụng đường dẫn tương đối đến trang View đó. Lúc này, phần mở rộng `.cshtml` phải được chỉ định.
 
 **Ví dụ:**
 ```csharp
-public class HomeController : Controller
- {
-  public IActionResult Index()
-  {
-   return View("~/Views/Web/About.cshtml");
-  }
- }
+    public class HomeController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View("~/Views/Web/About.cshtml");
+        }
+    }
+```
+Phương thức `View()` có thể được dùng để truyền dữ liệu từ controller sang view, được gọi là *Viewmodel*.
+
+Nội dung về Viewmodel đã được trình bày trong [Chapter 4](/Chapter4.md), nên sẽ không được đề cập lại ở phần này.
+
+Nếu như cần thực hiện chỉ định tên View và cả truyền dữ liệu Viewmodel, hãy sử dụng cú pháp sau:
+```csharp
+    View(string? viewName, object? model)
 ```
