@@ -26,3 +26,22 @@ Tuy nhiên, ta cũng có thể chỉ định tên của trang view cần trả v
 ```
 Do đó, nếu vì một lý do nào đó mà trang view không trùng tên với action hoặc muốn chuyển tiếp đến một trang view khác, ta có thể sử dụng cú pháp trên.
 
+**Ví dụ:**
+```csharp
+	public IActionResult Index()
+	{
+		return View("About");
+	}
+```
+Nếu muốn chuyển đến trang View khác thư mục với controller hiện tại, ta có thể sử dụng đường dẫn tương đối đến trang View đó. Lúc này, phần mở rộng `.cshtml` phải được chỉ định.
+
+**Ví dụ:**
+```csharp
+public class HomeController : Controller
+ {
+  public IActionResult Index()
+  {
+   return View("~/Views/Web/About.cshtml");
+  }
+ }
+```
