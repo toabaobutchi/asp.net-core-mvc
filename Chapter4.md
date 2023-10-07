@@ -90,7 +90,7 @@ Dữ liệu được truyền sang View có thể được truy cập một các
   <p> Name: @ViewData["Name"] </p>
   <p> Age: @ViewData["Age"] </p>
 ```
-Không những dùng tương tác giữa Controller và View mà còn giữa các trang View, bao gồm Partial View và Layout Page ([Đường dẫn sẽ được cập nhật sau]()).
+Không những dùng tương tác giữa Controller và View mà còn giữa các trang View, bao gồm [Partial View]() và [Layout Page]().
 
 Do lưu giá trị kiểu `object`, nên giá trị của các kiểu dữ liệu phức tạp cần phải thông qua ép kiểu trước khi sử dụng.
 
