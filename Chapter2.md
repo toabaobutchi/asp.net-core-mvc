@@ -102,10 +102,10 @@ Xem thêm các cú pháp khác của phương thức `RedirectToAction()` tại 
 **Ví dụ:**
 ```csharp
     public IActionResult Index() {
-	    return View();
+	return View();
     }
     public IActionResult GoToIndex() {
-	    return RedirectToAction("Index"); // chuyển hướng đến Action 'Index'
+	return RedirectToAction("Index"); // chuyển hướng đến Action 'Index'
     }
 ```
 Kiểu trả về `RedirectResult` và `RedirectToActionResult` đều là các kiểu dẫn xuất của `IActionResult`.
