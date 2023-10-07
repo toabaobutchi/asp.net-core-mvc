@@ -79,6 +79,8 @@ Vấn đề về đường dẫn trong ASP.NET Core MVC sẽ được đề cậ
 ## Thêm thành phần View
 Mỗi action của các controller thường sẽ trả về tương ứng với một trang Razor View (`*.cshtml`).
 
+Biểu diễn một luồng đơn giản khi nhận 1 request: `Request --> Controller --> Action --> View`
+
 Thay đổi nội dung của action `Index` ở phần trên như bên dưới:
 ```csharp
     public IActionResult Index()
