@@ -8,3 +8,4 @@ Mục lục:
 * [Chapter 4: Truyền dữ liệu sang View](/Chapter4.md)
 * [Chapter 5: Phương thức View](/Chapter5.md)
 * [Chapter 6: Truyền dữ liệu sang Controller](/Chapter6.md)
+* [Chapter 7: Route Values](/Chapter7.md)
