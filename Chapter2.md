@@ -6,7 +6,13 @@
 Để chuyển hướng phía người dùng, một cách đơn giản nhất để chuyển hướng là sử dụng siêu liên kết – thẻ `<a>` trong HTML.
 Vấn đề ở đây là giá trị cho thuộc tính `href`. Các đường dẫn trên trang web của ASP.NET Core phải gọi được đúng đến action của trang cần chuyển hướng.
 
-Theo URL pattern mặc định được định nghĩa trong `Program.cs`, đường dẫn sẽ có định dạng: `~/{controller}/{action}/{id}`. 
+Theo URL pattern mặc định được định nghĩa trong `Program.cs`, đường dẫn sẽ có định dạng: `~/{controller}/{action}/{id}`. Trong đó:
+* `{controller}` là tên[^1]. của controller chứa action cần gọi đến. 
+* `{action}` là tên của action cần gọi đến.
+
+[^1]: Tên của controller không bao gồm phần tên hậu tố `[...]Controller`.
+
+Nếu một trong 2 thông tin không chính xác, máy chủ sẽ phản hồi mã `404 - Not Found`. Đường dẫn trong ASP.NET Core MVC là ***case-insensitive***, tức là `Home/Index` tương tự như `home/index`.
 
 Ở [Chapter 9: ASP.NET Routing](), ta sẽ tìm hiểu cách cấu hình lại định dạng mặc định dạng đường dẫn theo nhu cầu cá nhân. Hiện tại ta vẫn sử dụng định dạng đường dẫn mặc định.
 
