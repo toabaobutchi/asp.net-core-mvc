@@ -45,6 +45,7 @@ Tuy nhận một đối tượng ẩn danh, nhưng vẫn có một số tên thu
     @Html.BeginRouteForm(new { controller = "Home", action = "Login" })
 ```
 Phương thức `Html.BeginRouteForm()` hiện đã không còn sử dụng phổ biến trong ASP.NET Core.
+
 Ngoài đối tượng ẩn danh `new { }`, các `routeValues` còn có thể nhận dữ liệu với kiểu dẫn xuất của `IDictionary<TKey, TValue>`, thường dùng nhất là `Dictionary<TKey, TValue>` và `RouteValueDictionary`.
 
 **Ví dụ:**
