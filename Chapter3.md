@@ -19,9 +19,9 @@ Bắt đầu biểu thức Razor bằng ký tự `@`, tiếp sau đó là biểu
 **Ví dụ:**
 
 ```csharp, html
-  <p> Now is @DateTime.Now </p>
-  @Html.ActionLink("Home page", "Index", "Home")
-  <h4> @message </h4> <!-- gọi biến 'message' -->
+    <p> Now is @DateTime.Now </p>
+    @Html.ActionLink("Home page", "Index", "Home")
+    <h4> @message </h4> <!-- gọi biến 'message' -->
 ```
 Việc đặt biểu thức ngay sau ký tự `@` được gọi là cú pháp biểu thức Razor ngầm định (Implicit Razor Expressions).
 
@@ -32,60 +32,60 @@ Cú pháp tường minh thường dùng cho các biểu thức có nhiều toán
 
 **Ví dụ:** Giả sử biến a = 10, b = 4:
 ```html, csharp
-  <p> Result: @a - b </p> <!-- Result: 10 – b -->
-  <p> Result: @a - @b </p> <!-- Result: 10 – 4 -->
-  <p> Result: @(a - b) </p> <!-- Result: 6 -->
+    <p> Result: @a - b </p> <!-- Result: 10 – b -->
+    <p> Result: @a - @b </p> <!-- Result: 10 – 4 -->
+    <p> Result: @(a - b) </p> <!-- Result: 6 -->
 ```
 Ở phần sau, ta sẽ khai báo biến khi đã làm quen với khối lệnh Razor.
 
 ## Razor Code Blocks
 Để chỉ định một khối lệnh dành cho mã C#, ta có thể sử dụng cú pháp sau:
 ```csharp
-  @{
-    // code here ...
-  }
+    @{
+        // code here ...
+    }
 ```
 **Ví dụ:**
 ```csharp
-  @{
-    int num = 10;
-    string sayHello = "Hello, I am ", name = "John";
-    string message = sayHello + name;
-  }
+    @{
+        int num = 10;
+        string sayHello = "Hello, I am ", name = "John";
+        string message = sayHello + name;
+    }
 ```
 Các biến được khai báo trong khối lệnh Razor không có hạn chế bởi tầm vực, có thể sử dụng ở khối lệnh hoặc biểu thức khác trong cùng một trang View.
 
 **Ví dụ:**
 ```csharp
-  @{
-    int a = 10, b = 4;
-    string message = "Hello, I am learning ASP.NET Core MVC";
-  }
-  <p> Result: @(a - b)</p>
-  @{
-    // sử dụng biến của khối lệnh khác
-    message = "I am learning Razor syntax";
-  }
+    @{
+        int a = 10, b = 4;
+        string message = "Hello, I am learning ASP.NET Core MVC";
+    }
+    <p> Result: @(a - b)</p>
+    @{
+        // sử dụng biến của khối lệnh khác
+        message = "I am learning Razor syntax";
+    }
 ```
 Mặc định, mã trong khối lệnh Razor là C#, nhưng vẫn có thể chuyển đổi về HTML. Một cách dễ hiểu thì ta có thể viết mã HTML trong khối lệnh Razor.
 
 **Ví dụ:**
 ```csharp
-  @{
-    DateTime now = DateTime.Now;
-    <p> Now is @now </p>
-  }
+    @{
+        DateTime now = DateTime.Now;
+        <p> Now is @now </p>
+    }
 ```
 Để hiển thị một đoạn văn bản thuần túy, ta có thể sử dụng thẻ `<text>` - một thẻ Razor mà không cần sử dụng thẻ HTML nào khác.
 
 **Ví dụ:**
 ```csharp, html
-  <div>
-  @{
-    string msg = "Hello";
-    <text>Message is @msg</text>
-  }
-  </div>
+    <div>
+    @{
+        string msg = "Hello";
+        <text>Message is @msg</text>
+    }
+    </div>
 ```
 
 ## Các cú pháp điều khiển
@@ -93,15 +93,17 @@ Các cú pháp điều khiển như `if`, `switch`, `for`, `while`, ... đều �
 
 **Ví dụ:**
 ```csharp
-  @{
-    int num = 19;
-  }
-  @if(num <= 15) {
-    num++;
-  }
-  else {
-    num--;
-  }
+    @{
+        int num = 19;
+    }
+    @if(num <= 15)
+    {
+        num++;
+    }
+    else
+    {
+        num--;
+    }
 ```
 **Lưu ý:** Khối lệnh `else` và `else if` không cần chỉ định với ký tự Razor `@`. Một số trường hợp có thể bỏ qua ngoặc `{ }` của cú pháp lệnh.
 
@@ -110,11 +112,11 @@ Trang Razor hỗ trợ cả cú pháp Comment của C# và HTML.
 
 **Ví dụ:**
 ```csharp, html
-  @{
-    /* C# Comment */
-    // C# Comment
-  }
-  <! -- HTML Comment -->
+    @{
+        /* C# Comment */
+        // C# Comment
+    }
+    <! -- HTML Comment -->
 ```
 Bên cạnh đó, trang Razor còn cung cấp một cú pháp Comment riêng bao quanh bởi `@*` và `*@`.
 
