@@ -9,14 +9,13 @@ Tham số `routeValues` thường được truyền dưới dạng là một đ�
 
 **Ví dụ:** 
 
-Để biểu diễn đường dẫn `~/Home/Show?name=Bod&age=15`, ta có thể dùng `<a>` của HTML với `href` hoặc **`asp-route-{param}`** của Tag Helper:
+* Để biểu diễn đường dẫn `~/Home/Show?name=Bod&age=15`, ta có thể dùng `<a>` của HTML với `href` hoặc **`asp-route-{param}`** của Tag Helper:
 ```html
     <a href="~/Home/ShowMessage?msg=Hello"> Message </a>
     <a asp-action="ShowMessage" asp-route-msg="Hello"> Message </a>
 ```
-Trong trường hợp đang sử dụng các phương thức đường dẫn và chuyển hướng được liệt kê bên trên, ta có thể chỉ định cho tham số `routeValues`.
+* Nhưng trong trường hợp đang sử dụng các phương thức đường dẫn và chuyển hướng được liệt kê bên trên, ta có thể chỉ định cho tham số `routeValues`.
 
-**Ví dụ:**
 ```html
     @Html.ActionLink("Message", "ShowMessage", "Home", new { msg = "Hello" })
 
