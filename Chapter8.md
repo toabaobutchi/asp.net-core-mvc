@@ -67,5 +67,92 @@ Ngoài ta, ASP.NET Core cung cấp phương thức `MapDefaultControllerRoute()`
         pattern: "{controller=Home}/{action=Index}/{id?}");
 ```
 
+**Lưu ý:** Đường dẫn của yêu cầu gửi đến không phân biệt chữ hoa chữ thường. Ví dụ: `home/index` là đường dẫn hoàn toàn giống với `Home/Index`.
 
+### Tham số defaults
 
+Tham số `defaults` trong phương thức `MapControllerRoute()` được dùng để chỉ định các giá trị mặc định trên URL.
+
+Mặc dù ta có thể chỉ định ngay trên URL các giá trị mặc định, nhưng nếu muốn ta vẫn có thể dùng tham số `defaults` như sau:
+
+```csharp
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"); // định nghĩa giá trị mặc định ngay trên URL pattern
+
+    // hoặc chỉ định cho tham số 'defaults'
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller}/{action}/{id}",
+        defaults: new { controller = "Home", action = "Index", id = 0);
+```
+Tham số `defaults` thường nhận một đối tượng ẩn danh chứa các thuộc tính và giá trị mặc định cho tham số. Tên thuộc tính phải trùng với tên tham số trên URL cần gán giá trị mặc định.
+
+### Thêm Route mới
+
+Trước khi tạo ra một Route mới, ta sẽ thực hành chỉnh sửa trên Route sẵn có.
+
+Trong URL pattern, các tham số đều nằm trong ngoặc `{ }` đại diện cho các giá trị *có thể thay đổi*. Nếu không nằm trong ngoặc `{ }`, tham số đó được xem là tiền tố – ***luôn phải*** có trên đường dẫn khi gửi yêu cầu.
+
+**Ví dụ:**
+
+* Với route được khai báo như sau:
+```csharp
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "web/{controller=Home}/{action=Index}/{id?}");
+```
+* Thì các yêu cầu được gửi đến phải có tiền tố `web` mới trùng khớp với route trên, ví dụ:
+
+```
+    /web/Home/Privacy
+    /web/Product/Show/5
+```
+
+Tham số trên URL pattern là một định danh tùy chọn, tuy nhiên có một số từ khóa được định sẵn của ASP.NET Core khi khai báo URL Pattern như `{action}`, `{controller}`, `{page}`, `{handler}` và `{area}`.
+
+Một URL pattern có thể là một chuỗi xác định sẵn – tức là không có tham số nào.
+
+**Ví dụ:**
+```csharp
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "user/home"); // URL không cần tham số nào
+```
+Tuy nhiên, Route ở ví dụ trên sẽ không sử dụng được và trả về lỗi **HTTP ERROR 404**.
+
+Nguyên nhân là do Route trên không khai báo Action và Controller sẽ được gọi, do đó mà request không biết chuyển tiếp đến đến đâu. Một Route dù có URL pattern như thế nào cũng phải ít nhất chỉ định thông tin về Action và Controller.
+
+Ở trường hợp trên có thể chỉ định với tham số `defaults` như sau:
+```csharp
+    // truy cập vào đường dẫn 'user/home' sẽ chuyển đến cho action 'Index' của 'HomeController'
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "user/home",
+        defaults: new { controller = "Home", action = "Index");
+```
+
+Như vậy, đối với các URL pattern nói chung nếu không có 1 trong 2 hoặc cả 2 tham số `{controller}` và `{action}` thì phải chỉ định chúng trong tham số `defaults`.
+
+Ta có thể khai báo thêm nhiều Route khác sử dụng cùng với Route mặc định. Tuy nhiên hãy lưu ý về thứ tự được thêm vào.
+
+Khi Request được gửi đến, Route có URL pattern ***phù hợp đầu tiên*** sẽ được sử dụng để định tuyến và bỏ qua các Route khác. Do đó nếu giữa các URL pattern có sự tương đồng thì sẽ xảy ra xung đột và kết quả định tuyến có thể không như mong muốn.
+
+**Ví dụ:**
+```csharp
+    app.MapControllerRoute(
+        name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    app.MapControllerRoute(
+        name: "products",
+        pattern: "product/{action=Show}/{id?}",
+        defaults: new { controller = "Product" });
+```
+Ở các route đăng ký như trên, thì yêu cầu có đường dẫn `products/Show/5` sẽ dùng Route `default` để định tuyến và bỏ qua Route `products`. Do ứng dụng kiểm tra được rằng đường dẫn `products/Show/5` phù hợp đầu tiên với URL pattern `{controller}/{action}/{id}`. 
+
+Để tránh xung đột, ta thường phải cân nhắc trước khai báo các Route và đưa Route mặc định xuống dưới cùng.
+
+### Giá trị mặc định cho tham số
+
+Như đã trình bày ở [Tham số defaults](#tham-số-defaults)
