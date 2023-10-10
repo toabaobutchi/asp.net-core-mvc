@@ -155,4 +155,156 @@ Khi Request được gửi đến, Route có URL pattern ***phù hợp đầu ti
 
 ### Giá trị mặc định cho tham số
 
-Như đã trình bày ở [Tham số defaults](#tham-số-defaults)
+Như đã trình bày ở [Tham số defaults](#tham-số-defaults), các tham số trên URL pattern có thể được chỉ định bằng tham số `defaults`.
+
+Ngoài ra, ngay trên URL pattern ta có thể chỉ định giá trị cho tham số với cú pháp:
+```
+    {parameter=value}
+```
+
+**Ví dụ:**
+```csharp
+    app.MapControllerRoute(
+        name: "plus",
+        pattern: "plus/{a=0}/{b=0}",
+        defaults: new { controller = "Home", action = "Sum" });
+```
+Các đường dẫn sau sẽ hợp lệ với Route trên:
+```
+    /plus/14/7
+    /plus/15
+    /plus
+```
+
+### Route Constraints
+
+Các tham số trên URL pattern thường không khai báo các ràng buộc về kiểu dữ liệu, kích thước, khoảng giá trị, ... do đó trong một số trường hợp ta cần phải kiểm tra ràng buộc ngay trong Action.
+
+**Ví dụ:**
+```csharp
+    public IActionResult Sum(string a, string b) // bắt dữ liệu với kiểu string
+    {
+        try
+        {
+            // kiểm tra xem tham số nhận được có phải là số hay không
+            return Content(int.Parse(a) + int.Parse(b) + "");
+		}
+        catch
+        {
+            return Content("Sai định dạng số!");
+        }
+    }
+```
+
+Tuy nhiên, ta hoàn toàn có thể chỉ định các ràng buộc trên tham số. Khi thỏa mãn toàn bộ ràng buộc, Request mới được định tuyến đến Action tương ứng.
+
+Có 2 cách để đặt ràng buộc cho tham số:
+
+* *Inline Constraint*: chỉ định ràng buộc ngay trên URL pattern với cú pháp:
+```
+    {parameter:constraint}
+```
+
+Bảng bên dưới sẽ liệt kế các ràng buộc có thể dùng:
+
+<table>
+    <tr>
+        <th> Ràng buộc </th>
+        <th> Mô tả </th>
+        <th> Ví dụ </th>
+    </tr>
+    <tr>
+        <td><code>int</code>, <code>bool</code>, <code>datetime</code>, <code>decimal</code>, <code>long</code>, <code>double</code>, <code>float</code></td>
+        <td>Ràng buộc kiểu dữ liệu</td>
+        <td><code>{id:int}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>minlength(n)</code><br />
+            <code>minlength(n)</code><br />
+            <code>length(min, max)</code><br />
+        </td>
+        <td>Ràng buộc độ dài chuỗi</td>
+        <td><code>{pwd:length(8, 16)}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>length(n)</code>
+        </td>
+        <td>Ràng buộc độ dài chính xác của chuỗi</td>
+        <td><code>{phone:length(10)}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>min(n)</code><br />
+            <code>min(n)</code><br />
+            <code>range(min, max)</code><br />
+        </td>
+        <td>Ràng buộc khoảng giá trị số</td>
+        <td><code>{count:range(1,100)}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>alpha</code>
+        </td>
+        <td>Ràng buộc chuỗi không chứa số</td>
+        <td><code>{name:alpha}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>required</code>
+        </td>
+        <td>Yêu cầu phải có giá trị</td>
+        <td><code>{msg:required}</code></td>
+    </tr>
+    <tr>
+        <td>
+            <code>regex(exp)</code>
+        </td>
+        <td>Ràng buộc khớp RegEx</td>
+        <td><code>{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}</code></td>
+    </tr>
+</table>
+
+**Ví dụ:**
+```csharp
+    app.MapControllerRoute(
+        name: "products",
+        pattern: "product/get/{productId:min(1)}",
+        defaults: new { controller = "Product", action = "Detail" });
+```
+Một tham số có thể chỉ định nhiều ràng buộc, phân cách bằng dấu `:`, ví dụ: `{id:alpha:required}`.
+
+Một lưu ý quan trọng là tham số **không thể** vừa chỉ định giá trị mặc định vừa khai báo các ràng buộc. Ta có thể chỉ định giá trị mặc định trong tham số `defaults`.
+
+* Sử dụng tham số `constraints`: Tham số `constraints` được dùng để khai báo các ràng buộc trên tham số đường dẫn. Các tham số được chỉ định ràng buộc với cú pháp:
+```csharp
+    parameter = new constraint_class()
+```
+Trong đó, `constraint_class` là các lớp có phần hậu tố `[...]RouteConstraint` như `IntRouteConstraint`, `MinRouteConstraint`, `DateTimeRouteConstraint`, ... tương tự các ràng buộc của Inline Constraint.
+
+**Ví dụ:**
+```csharp
+    app.MapControllerRoute(
+        name: "plus",
+        pattern: "plus/{a=0}/{b=0}",
+        defaults: new { controller = "Home", action = "Sum" },
+        constraints: new { a = new IntRouteConstraint(), b = new IntRouteConstraint() });
+```
+
+### Optional Parameters
+
+Tham số tùy chọn là các tham số có thể bỏ qua khi gửi yêu cầu, không cần xuất hiện trong URL.
+
+Để biểu diễn tham số tùy chọn trên URL pattern, ta sẽ sử dụng dấu hỏi `?` phía sau tham số và sau tất cả các ràng buộc nếu có.
+
+**Ví dụ:**
+```
+    {id:max(100)?}
+    {name:alpha?}
+```
+
+**Lưu ý:**
+* URL pattern không thể chứa cùng lúc cú pháp tham số tùy chọn và giá trị mặc định. Nếu muốn hãy chỉ định giá trị mặc định trong tham số `defaults`.
+* Các tham số tùy chọn phải ở phía sau các tham số bắt buộc trên URL pattern.
+**Ví dụ:** `{a}/{b?}/{c}` là không hợp lệ vì tham số tùy chọn `{b?}` nằm phía trước tham số bắt buộc `{c}`. Ta có thể phải viết lại thành: `{a}/{c}/{b?}`.
