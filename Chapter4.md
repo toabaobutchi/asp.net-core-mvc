@@ -8,7 +8,7 @@ Vì vậy, nội dung này sẽ trình bày các cách để truyền dữ liệ
 **Strongly-typed** hay **Strong typing** là cách truyền dữ liệu cho phép ta kiểm soát kiểu mà dữ liệu được gửi qua View. Bất kỳ biến hay hằng phải có khai báo kiểu dữ liệu một cách tường minh. Quá trình kiểm tra kiểu dữ liệu sẽ được thực hiện ở thời điểm biên dịch.
 Các truyền dữ liệu này thường được biết đến với tên là *Viewmodel*. Để truyền dữ liệu theo kiểu này, ta sẽ sử dụng phương thức `View()`. 
 
-Vì phương thức `View()` sẽ được trình bày chi tiết ở [Chapter 5](/Chapter5.md), vì vậy ta sẽ xét cú pháp đơn giản nhất như sau:
+Vì phương thức `View()` sẽ được trình bày chi tiết ở [Chapter 5: Phương thức View](/Chapter5.md), vì vậy ta sẽ xét cú pháp đơn giản nhất như sau:
 
 ```csharp
     View(object? model)
