@@ -157,10 +157,7 @@ Khi Request được gửi đến, Route có URL pattern ***phù hợp đầu ti
 
 Như đã trình bày ở [Tham số defaults](#tham-số-defaults), các tham số trên URL pattern có thể được chỉ định bằng tham số `defaults`.
 
-Ngoài ra, ngay trên URL pattern ta có thể chỉ định giá trị cho tham số với cú pháp:
-```
-    {parameter=value}
-```
+Ngoài ra, ngay trên URL pattern ta có thể chỉ định giá trị cho tham số với cú pháp: `{parameter=value}`
 
 **Ví dụ:**
 ```csharp
@@ -200,10 +197,7 @@ Tuy nhiên, ta hoàn toàn có thể chỉ định các ràng buộc trên tham 
 
 Có 2 cách để đặt ràng buộc cho tham số:
 
-* *Inline Constraint*: chỉ định ràng buộc ngay trên URL pattern với cú pháp:
-```
-    {parameter:constraint}
-```
+* ***Inline Constraint***: chỉ định ràng buộc ngay trên URL pattern với cú pháp: `{parameter:constraint}`
 
 Bảng bên dưới sẽ liệt kế các ràng buộc có thể dùng:
 
@@ -273,7 +267,7 @@ Bảng bên dưới sẽ liệt kế các ràng buộc có thể dùng:
         pattern: "product/get/{productId:min(1)}",
         defaults: new { controller = "Product", action = "Detail" });
 ```
-Một tham số có thể chỉ định nhiều ràng buộc, phân cách bằng dấu `:`, ví dụ: `{id:alpha:required}`.
+Một tham số có thể chỉ định nhiều ràng buộc, phân cách bằng dấu `:`, ví dụ `{id:alpha:required}`.
 
 Một lưu ý quan trọng là tham số **không thể** vừa chỉ định giá trị mặc định vừa khai báo các ràng buộc. Ta có thể chỉ định giá trị mặc định trong tham số `defaults`.
 
@@ -308,3 +302,99 @@ Tham số tùy chọn là các tham số có thể bỏ qua khi gửi yêu cầu
 * URL pattern không thể chứa cùng lúc cú pháp tham số tùy chọn và giá trị mặc định. Nếu muốn hãy chỉ định giá trị mặc định trong tham số `defaults`.
 * Các tham số tùy chọn phải ở phía sau các tham số bắt buộc trên URL pattern.
 **Ví dụ:** `{a}/{b?}/{c}` là không hợp lệ vì tham số tùy chọn `{b?}` nằm phía trước tham số bắt buộc `{c}`. Ta có thể phải viết lại thành: `{a}/{c}/{b?}`.
+
+## Route attribute
+
+Attribute `[Route]` được dùng để xác định Route trực tiếp trên một controller hay action cụ thể.
+
+Cú pháp:
+```csharp
+    [Route(string template, Properties: [Name = string?], [Order = int])]
+```
+
+Trong đó:
+* `template`: URL pattern dành cho controller hay action đang chỉ định (giống như [Conventional Route](#conventional-route)).
+* `Name`: tên route, mặc định là `null`.
+* `Order`: thứ tự thực thi của Route. Giá trị càng nhỏ thì sẽ được thực thi trước. Mặc định là `0`. Attribute `[Route]` sẽ ***được xem xét trước*** các Conventional Route.
+
+### [Route] dùng cho action
+
+Khi attribute `[Route]` chỉ định cho action, nó sẽ khai báo một URL pattern dẫn đến trực tiếp action đó, vì vậy ta sẽ không chỉ định tham số về controller hay action nữa.
+
+**Ví dụ:**
+```csharp
+    public class HomeController : Controller
+    {
+        [Route("sum/{a=0}/{b=0}", Name = "plus")]
+        public string Sum(int a, int b)
+        {
+            return a + b + "";
+        }
+        
+        [Route("log/{msg?}", Name = "log")]
+        public string Log(string? msg)
+        {
+            return msg ?? "No message found !";
+        }
+    }
+```
+
+Khi chỉ định Route, ta có thể khai báo cả thuộc tính `Name` để cung cấp một tên Route. Một số phương thức trong ASP.NET Core cần thông tin về tên Route, ví dụ phương thức `Html.BeginRouteForm()`.
+
+Ta hoàn toàn có thể khai báo nhiều Route cho một Action (nhiều đường dẫn trỏ về một Action).
+
+**Ví dụ:**
+```csharp
+    [Route("about")]
+    [Route("company/about")]
+    public IActionResult About()
+    {
+        return View();
+    }
+```
+
+### [Route dùng cho Controller]
+
+Khi `[Route]` sử dụng cho controller, nó có thể khai báo một tiền tố chung cho các Request gửi đến. 
+
+Khi khai báo `[Route]` cho Controller, các Action cũng phải được chỉ định với attribute `[Route]`.
+
+**Ví dụ:**
+```csharp
+    [Route("page")] // các yêu cầu phải bắt đầu bằng tiền tố 'page'
+    public class HomeController : Controller
+    {
+        [Route("")] // mặc định: ~/page
+        [Route("home")] // ~/page/home
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+```
+Sẽ có một Action được phép chỉ định làm Action mặc định với attribute `[Route("")]`.
+
+Ta có thể sử dụng các thông báo `[controller]` và `[action]` để thay thế cho tên controller và action.
+
+**Ví dụ:**
+```csharp
+    [Route("[controller]")] // thay cho /home
+    public class HomeController : Controller
+    {
+        [Route("")] // ~/home
+        [Route("[action]")] // ~/home/index
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("search")] // ~/home/search
+        [Route("[action]/{id:int}")] // ~/home/searchbyid/15
+        public ActionResult SearchById(int id)
+        {
+            // code block ...
+            return View();
+        }
+    }
+```
+
