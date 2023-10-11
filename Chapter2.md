@@ -14,7 +14,7 @@ Theo URL pattern mặc định được định nghĩa trong `Program.cs`, đư�
 
 Nếu một trong 2 thông tin không chính xác, máy chủ sẽ phản hồi mã `404 - Not Found`. Đường dẫn trong ASP.NET Core MVC là ***case-insensitive***, tức là `Home/Index` tương tự như `home/index`.
 
-Ở [Chapter 9: ASP.NET Routing](), ta sẽ tìm hiểu cách cấu hình lại định dạng mặc định dạng đường dẫn theo nhu cầu cá nhân. Hiện tại ta vẫn sử dụng định dạng đường dẫn mặc định.
+Ở [Chapter 8: ASP.NET Routing](/Chapter8.md), ta sẽ tìm hiểu cách cấu hình lại định dạng mặc định dạng đường dẫn theo nhu cầu cá nhân. Hiện tại ta vẫn sử dụng định dạng đường dẫn mặc định.
 
 Ta sẽ không xem xét về tham số `{id}` trong nội dung tài liệu này.
 
@@ -50,7 +50,7 @@ Nếu không muốn sử dụng Anchor Tag Helper, ta có thể dùng phương t
     <a href="@Url.ActionLink("Privacy", "Home")"> Privacy </a>
     <a href="@Url.ActionLink("Welcome", "Web")"> Welcome page </a>
 ```
-[Cú pháp Razor]() cho phép ta nhúng mã C# vào trong mã HTML và bắt đầu bằng ký tự `@`.
+[Cú pháp Razor](/Chapter3.md) cho phép ta nhúng mã C# vào trong mã HTML và bắt đầu bằng ký tự `@`.
 
 ### Sử dụng phương thức Html.ActionLink()
 Khác với phương thức `Url.ActionLink()` chỉ trả về đường dẫn cho thuộc tính `href`, phương thức `Html.ActionLink()` sẽ tạo ra cả một thẻ `<a>`.
