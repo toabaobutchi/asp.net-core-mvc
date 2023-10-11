@@ -55,7 +55,7 @@ Tuy nhiên, do tham số `{id?}` không có ràng buộc về kiểu dữ liệu
     /Home/Show/abc
 ```
 
-Ta sẽ tìm hiểu về các vấn đề ràng buộc trên tham số ở phần [Route Contraints]().
+Ta sẽ tìm hiểu về các vấn đề ràng buộc trên tham số ở phần [Route Contraints](#route-constraints).
 
 Ngoài ta, ASP.NET Core cung cấp phương thức `MapDefaultControllerRoute()` để thay thế cho Route mặc định.
 ```csharp
