@@ -208,7 +208,7 @@ Bảng bên dưới sẽ liệt kế các ràng buộc có thể dùng:
         <th> Ví dụ </th>
     </tr>
     <tr>
-        <td><code>int</code>, <code>bool</code>, <code>datetime</code>, <code>decimal</code>, <code>long</code>, <code>double</code>, <code>float</code></td>
+        <td><code>int</code><br /> <code>bool</code><br /> <code>datetime</code><br /> <code>decimal</code><br /> <code>long</code><br /> <code>double</code><br /> <code>float</code></td>
         <td>Ràng buộc kiểu dữ liệu</td>
         <td><code>{id:int}</code></td>
     </tr>
