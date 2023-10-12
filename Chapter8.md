@@ -256,7 +256,7 @@ Bảng bên dưới sẽ liệt kế các ràng buộc có thể dùng:
             <code>regex(exp)</code>
         </td>
         <td>Ràng buộc khớp RegEx</td>
-        <td><code>{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}</code></td>
+        <td><code>{ssn:regex(^\\d{{3}}-\\d{{2}}$)}</code></td>
     </tr>
 </table>
 
