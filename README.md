@@ -10,3 +10,4 @@ Mục lục:
 * [Chapter 6: Truyền dữ liệu sang Controller](/Chapter6.md)
 * [Chapter 7: Route Values](/Chapter7.md)
 * [Chapter 8: ASP.NET Routing](/Chapter8.md)
+* [Chapter 9: Razor Layout Page](/Chapter9.md)
