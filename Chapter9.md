@@ -224,3 +224,4 @@ ngược lại nếu không bắt buộc là `false`.
 
 Nếu các section bắt buộc (Require section) không tìm thấy nội dung từ Content page, một ngoại lệ sẽ ném ra.
 
+**Xem thêm:** RenderSectionAsync() để thêm các nội dung bất đồng bộ.
