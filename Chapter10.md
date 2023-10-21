@@ -104,5 +104,18 @@ Khi một Partial view được khởi tạo, nó sẽ nhận một bản sao ch
 
 Tuy nhiên vì là bản sao chép, các thay đổi trên đối tượng `ViewData` hay `ViewBag` không thể cập nhật lại ở trang View gốc.
 
+<img src="https://github.com/toabaobutchi/asp.net-core-mvc/assets/147165208/f2d95870-74aa-4e4b-b16d-d852f97dbb68" width="250" />
+
+Ngoài ra ta có thể sử dụng một cách thức tương tự *Viewmodel* để truyền dữ liệu:
+
+* Sử dụng thuộc tính `model` trong Partial Tag Helper:
+
+```html
+	<partial name="..." model="<object>" />
+```
+
+* Sử dụng phương thức `Html.PartialAsync(string partialName, object model)`.
+
+
 
 
