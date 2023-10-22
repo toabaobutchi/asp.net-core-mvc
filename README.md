@@ -11,3 +11,4 @@ Mục lục:
 * [Chapter 7: Route Values](/Chapter7.md)
 * [Chapter 8: ASP.NET Routing](/Chapter8.md)
 * [Chapter 9: Razor Layout Page](/Chapter9.md)
+* [Chapter 10: Partial View](/Chapter10.md)
