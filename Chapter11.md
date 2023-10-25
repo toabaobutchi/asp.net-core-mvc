@@ -39,9 +39,9 @@ Trong đó:
 
 | Giá trị | Mô tả |
 | --- | --- |
-| file_extension | Chỉ định phần mở rộng cụ thể của file (.png, .mp3, .docx, ...) |
-| audio/* | Cho phép các tệp âm thanh |
-| video/* | Cho phép các tệp video |
-| image/* | Cho phép các tệp hình ảnh |
-| media_type | Xem thêm về [**Media Type**](https://www.iana.org/assignments/media-types/media-types.xhtml) |
+| `file_extension` | Chỉ định phần mở rộng cụ thể của file (.png, .mp3, .docx, ...) |
+| `audio/*` | Cho phép các tệp âm thanh |
+| `video/*` | Cho phép các tệp video |
+| `image/*` | Cho phép các tệp hình ảnh |
+| `media_type` | Xem thêm về [**Media Type**](https://www.iana.org/assignments/media-types/media-types.xhtml) |
 
