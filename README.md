@@ -13,3 +13,4 @@ Mục lục:
 * [Chapter 9: Razor Layout Page](/Chapter9.md)
 * [Chapter 10: Partial View](/Chapter10.md)
 * [Chapter 11: Upload files](/Chapter11.md)
+* [Chapter 12: Area](/Chapter12.md)
