@@ -66,6 +66,6 @@ Ta sẽ không cần khai báo nhiều tham số như ví dụ trên mà có th�
 
 Quá trình ánh xạ kiểu dữ liệu diễn ra như sau:
 
-![Picture1](https://github.com/toabaobutchi/asp.net-core-mvc/assets/147165208/8394ccec-786a-4af8-8a45-35e086ea00d9)
+![Ppt1](https://github.com/toabaobutchi/asp.net-core-mvc/assets/147165208/c6314742-b417-4d31-84ca-d802262c600c)
 
 
