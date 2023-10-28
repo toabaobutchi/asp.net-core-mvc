@@ -14,3 +14,4 @@ Mục lục:
 * [Chapter 10: Partial View](/Chapter10.md)
 * [Chapter 11: Upload files](/Chapter11.md)
 * [Chapter 12: Area](/Chapter12.md)
+* [Chapter 13: Model Binding](/Chapter13.md)
