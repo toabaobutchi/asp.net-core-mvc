@@ -93,7 +93,7 @@ Mặc định, cơ chế Model Binding sẽ nhận các cặp khóa – giá tr�
 
 * Uploaded files
 
-Tức là nếu các dữ liệu từ View có cùng tên khóa (tên thuộc tính name, tên tham số trên URL, ...) thì Model Binding sẽ sử dụng dữ liệu từ nguồn ưu tiên hơn.
+Tức là nếu các dữ liệu từ View có cùng tên khóa (tên thuộc tính `name`, tên tham số trên URL, ...) thì Model Binding sẽ sử dụng dữ liệu từ nguồn ưu tiên hơn.
 
 **Ví dụ:**
 
@@ -124,4 +124,73 @@ Tức là nếu các dữ liệu từ View có cùng tên khóa (tên thuộc t�
 
 Tuy nhiên, ASP.NET Core cho phép ta xác định nguồn dữ liệu mà tham số Action sẽ nhận, bao gồm các attribute sau:
 
-* 
+* `[FromQuery]` - lấy giá trị từ Query string (chuối truy vấn)
+
+* `[FromRoute]` - lấy giá trị từ Route data (có cả thông tin về Controller, Action, ...)
+
+* `[FromForm]` - lấy từ HTML Form
+
+* `[FromBody]` - lấy dữ liệu từ phần thân của yêu cầu (Request body)
+
+* `[FromHeader]` - lấy dữ liệu từ HTTP Header
+
+**Ví dụ:**
+
+```cs
+    // dùng dữ liệu từ query string
+    public IActionResult Show([FromQuery] int myId)
+    { 
+        // xử lý ...
+    }
+```
+
+Bên cạnh việc chỉ định cho tham số của Action, ta có thể dùng các attribute trên cho thuộc tính của đối tượng.
+
+**Ví dụ:**
+
+```cs
+    public class Product
+    {	
+        [FromQuery] // khi binding sử dụng dữ liệu từ Query string
+        public string Name { get; set; }
+
+        [FromRoute] // khi binding sử dụng dữ liệu từ Route data
+        public double Price { get; set; }
+
+        public string Description { get; set; }
+	}
+```
+
+Các attribute trên tham số của Action không ghi đè các attribute trên thuộc tính của đối tượng, trừ `[FromBody]`.
+
+## Attribute [Bind], [BindNever] và [BindRequired]
+
+Có 3 attribute thường dùng để kiểm soát cơ chế Model Binding trên các thuộc tính của lớp: `[Bind]`, `[BindNerver]`, `[BindRequired]`.
+
+* Attribute `[Bind]` dùng để chỉ định các thuộc tính dùng cơ chế Model Binding.
+
+**Ví dụ:**
+
+```cs
+    [Bind("Name, Description")]
+	public class Product
+    {	
+        public string Name { get; set; } 
+        public double Price { get; set; } // không được binding
+        public string Description { get; set; }
+	}
+```
+Attribute này còn có thể chỉ định trước tham số của Action.
+
+**Ví dụ:**
+
+```cs
+    public IActionResult Show([Bind("Name, Price")] Product pro)
+    {
+        // xử lý ...
+    }
+```
+
+* Attribute `[BindNever]` được sử dụng để chỉ định thuộc tính nào không sử dụng khi binding.
+
+* Attribute `[BindRequired]` yêu cầu dữ liệu cho thuộc tính được chỉ định. Nếu không một lỗi vi phạm xác thực sẽ đưa ra với thuộc tính tương ứng. Xem thêm về [**ASP.NET Core Validation**]().
