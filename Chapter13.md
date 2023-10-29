@@ -110,8 +110,8 @@ Tức là nếu các dữ liệu từ View có cùng tên khóa (tên thuộc t�
 ```cs
     public IActionResult Show(int myId) // dùng ô đầu vào của biểu mẫu
     {
-		// xử lý ...
-	}
+        // xử lý ...
+    }
 ```
 
 > [!Note]
@@ -158,7 +158,7 @@ Bên cạnh việc chỉ định cho tham số của Action, ta có thể dùng 
         public double Price { get; set; }
 
         public string Description { get; set; }
-	}
+    }
 ```
 
 Các attribute trên tham số của Action không ghi đè các attribute trên thuộc tính của đối tượng, trừ `[FromBody]`.
