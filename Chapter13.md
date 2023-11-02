@@ -194,3 +194,7 @@ Attribute này còn có thể chỉ định trước tham số của Action.
 * Attribute `[BindNever]` được sử dụng để chỉ định thuộc tính nào không sử dụng khi binding.
 
 * Attribute `[BindRequired]` yêu cầu dữ liệu cho thuộc tính được chỉ định. Nếu không một lỗi vi phạm xác thực sẽ đưa ra với thuộc tính tương ứng. Xem thêm về [**ASP.NET Core Validation**]().
+
+## Custom Model Binder
+
+
