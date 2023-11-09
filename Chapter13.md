@@ -197,4 +197,11 @@ Attribute này còn có thể chỉ định trước tham số của Action.
 
 ## Custom Model Binder
 
+Việc ánh xạ giữa các dữ liệu request và lớp thực thể trong chương trình được thực hiện bởi Model Binder (có thể tạm dịch là _Trình ánh xạ thực thể_).
+
+Model Binder mặc định hỗ trợ hầu hết các kiểu dữ liệu .NET Core và có thể thoả mãn hầu hết các nhu cầu của lập trình viên. Tuy nhiên, một số đầu vào dữ liệu không được ánh xạ theo cách thông thường.
+
+**Ví dụ:** Ta muốn quy định rằng thuộc tính `string Resolution { get; set; }` của lớp `Laptop` là tổng hợp của 2 ô đầu vào `<input name="width" />` và `<input name="height" />`. Tuy nhiên, với Model Binder mặc định, các ô đầu vào này sẽ tìm đến các thuộc tính cùng tên (không phân biệt text-case). Như vậy, ta sẽ tạo một logic ánh xạ mới cho nhu cầu hiện tại.
+
+
 
