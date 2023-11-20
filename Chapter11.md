@@ -8,7 +8,7 @@ Thuộc tính `enctype` có thể nhận 3 giá trị sau:
 
 | Giá trị | Mô tả |
 | --- | --- |
-| `application/x-www-form-urlencoded` | Mặc định. Mã hóa các ký tự trước khi gửi |
+| `application/x-www-form-urlencoded` | **Mặc định**. Mã hóa các ký tự trước khi gửi |
 | `multipart/form-data` | Dành cho việc gửi file lên máy chủ |
 | `text/plain` | Không mã hóa dữ liệu. **Không khuyến nghị sử dụng** |
 
@@ -60,7 +60,7 @@ Ta có thể chỉ định nhiều giá trị và phân cách chúng bằng dấ
 Như cách nhận dữ liệu từ biểu mẫu thông thường, ta sẽ khai báo các tham số cho Action được chỉ định xử
 lý.
 
-Với các giá trị đầu vào phổ biến, kiểu dữ liệu cho tham số có thể là `string`, `int`, `bool`, ... Nhưng để lấy dữ
+Với các giá trị đầu vào thường dùng, kiểu dữ liệu cho tham số có thể là `string`, `int`, `bool`, ... Nhưng để lấy dữ
 liệu dạng tệp, ta sẽ sử dụng kiểu `IFormFile` cho tham số cần nhận.
 
 **Ví dụ:**
@@ -101,7 +101,7 @@ Một số thuộc tính và phương thức của interface [**`IFormFile`**](h
         }
         else
         {
-            string path = Directory.GetCurrentDirectory() + "\\Uploads\\";
+            string path = @"wwwroot\Uploads\";
             Directory.CreateDirectory(path); // tạo thư mục Uploads nếu chưa tồn tại
             using(var stream = System.IO.File.Create(path + file.FileName)) {
                 file.CopyTo(stream);
@@ -110,6 +110,9 @@ Một số thuộc tính và phương thức của interface [**`IFormFile`**](h
         }
     }
 ```
+
+> [!Note]
+> `wwwroot` là đường dẫn gốc của ứng dụng web ASP.NET khi truy cập vào các file tĩnh (Static files) như ảnh, video, ...
 
 ## Xử lý với nhiều tệp
 
@@ -142,7 +145,7 @@ Bên cạnh đó khi thực hiện lưu nhiều file ta nên sử dụng phươn
     public async Task<IActionResult> GetImages(List<IFormFile> files)
     {
         // xử lý các trường hợp file lỗi
-        string path = Directory.GetCurrentDirectory() + "\\Uploads\\";
+        string path = @"wwwroot\Uploads\";
         Directory.CreateDirectory(path);
         foreach(var file in files)
         {
