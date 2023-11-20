@@ -96,6 +96,8 @@ Một số thuộc tính và phương thức của interface [**`IFormFile`**](h
 | `Stream CopyTo(Stream target)` | Lưu tệp vào luồng `target`
 | `Stream CopyToAsync(Stream target)` | Lưu tệp bất đồng bộ vào luồng `target`
 
+Đối tượng kiểu `Stream` có thể được tạo ra bằng nhiều cách trong C# như `System.IO.File.Create()`, `System.IO.FileStream`, ... Các kiểu dữ liệu này nên sử dụng cùng với cú pháp mệnh đề `using` (`using` statement).
+
 **Ví dụ:**
 
 ```cs
@@ -118,7 +120,7 @@ Một số thuộc tính và phương thức của interface [**`IFormFile`**](h
 ```
 
 > [!Note]
-> `wwwroot` là đường dẫn gốc của ứng dụng web ASP.NET khi truy cập vào các file tĩnh (Static files) như ảnh, video, ...
+> `wwwroot` là đường dẫn gốc của ứng dụng web ASP.NET khi một yêu cầu (Request) truy cập vào các file tĩnh (Static files) như ảnh, video, ...
 
 ## Xử lý với nhiều tệp
 
@@ -130,7 +132,8 @@ Một số thuộc tính và phương thức của interface [**`IFormFile`**](h
     <input type="file" accept="image/*" multiple />
 ```
 
-Thuộc tính `multiple` chỉ có thể chỉ định cho đầu vào là `email` và `file`. Để chọn nhiều `file`, ta ấn giữ `Ctrl`
+> [!Warning]
+> Thuộc tính `multiple` chỉ có thể chỉ định cho đầu vào là `email` và `file`. Để chọn nhiều `file`, ta ấn giữ `Ctrl`
 hoặc `Shift` khi chọn lựa.
 
 Tham số cho Action dành để nhận nhiều file sẽ là một trong 3 kiểu dữ liệu sau:
