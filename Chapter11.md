@@ -52,8 +52,14 @@ Trong đó:
 ```
 Ta có thể chỉ định nhiều giá trị và phân cách chúng bằng dấu phẩy (Comma) `,`.
 
+**Ví dụ:**
+
+```html
+    <input type="file" accept="image/jpg,image/png" />
+```
+
 > [!Warning]
-> Không nên sử dụng thuộc tính `accept` như một công cụ kiểm tra đầu vào. Hãy thực hiện điều đó ở máy chủ.
+> Không nên sử dụng thuộc tính `accept` như một công cụ kiểm tra đầu vào. Hãy thực hiện điều đó ở cả phía máy chủ.
 
 ## Nhận tệp được gửi
 
@@ -69,8 +75,8 @@ liệu dạng tệp, ta sẽ sử dụng kiểu `IFormFile` cho tham số cần 
 ```html
     <form action="~/Home/GetImage" method="post" enctype="multipart/form-data">
         <input type="file" accept="image/*" name="file" />
-        <input type="submit" value="Submit" />
-</form>
+        <input type="submit" name="submit-btn" value="Submit" />
+    </form>
 ```
 * Action nhận dữ liệu
 
