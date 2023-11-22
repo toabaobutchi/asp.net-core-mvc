@@ -15,3 +15,4 @@ Mục lục:
 * [Chapter 11: Upload files](/Chapter11.md)
 * [Chapter 12: Area](/Chapter12.md)
 * [Chapter 13: Model Binding](/Chapter13.md) - Chưa hoàn thành
+* [Chapter 14: AJAX Request](/Chapter14.md)
