@@ -59,12 +59,11 @@ Ta có thể chỉ định nhiều giá trị và phân cách chúng bằng dấ
 ```
 
 > [!Warning]
-> Không nên sử dụng thuộc tính `accept` như một công cụ kiểm tra đầu vào. Hãy thực hiện điều đó ở cả phía máy chủ.
+> Không nên sử dụng thuộc tính `accept` như một công cụ kiểm tra đầu vào (Validation Tool). Hãy thực hiện điều đó ở cả phía máy chủ.
 
 ## Nhận tệp được gửi
 
-Như cách nhận dữ liệu từ biểu mẫu thông thường, ta sẽ khai báo các tham số cho Action được chỉ định xử
-lý.
+Như cách nhận dữ liệu từ biểu mẫu thông thường, ta sẽ khai báo các tham số cho Action được chỉ định xử lý.
 
 Với các giá trị đầu vào thường dùng, kiểu dữ liệu cho tham số có thể là `string`, `int`, `bool`, ... Nhưng để lấy dữ
 liệu dạng tệp, ta sẽ sử dụng kiểu `IFormFile` cho tham số cần nhận.
