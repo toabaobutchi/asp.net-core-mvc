@@ -197,7 +197,7 @@ Trong đó:
     }
 ```
 
-## Phương thức get() và post()
+### Phương thức get() và post()
 
 Phương thức `get()` và `post()` đều được dùng để gửi yêu cầu đến máy chủ (có thể đi kèm dữ liệu) với phương thức GET và POST tương ứng.
 
