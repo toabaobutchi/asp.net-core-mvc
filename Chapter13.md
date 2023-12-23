@@ -173,12 +173,12 @@ Có 3 attribute thường dùng để kiểm soát cơ chế Model Binding trên
 
 ```cs
     [Bind("Name, Description")]
-	public class Product
+    public class Product
     {	
         public string Name { get; set; } 
         public double Price { get; set; } // không được binding
         public string Description { get; set; }
-	}
+    }
 ```
 Attribute này còn có thể chỉ định trước tham số của Action.
 
