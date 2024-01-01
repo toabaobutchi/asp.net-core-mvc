@@ -88,7 +88,7 @@ Ta cũng có thể dùng Route để chỉ định đường dẫn cùng các th
 
 Action dùng cho AJAX có thể vẫn trả về kiểu `IActionResult`, tuy nhiên phương thức `View()` lại không thường được sử dụng, thay vào đó là các phương thức sau:
 
-- [**`Content()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.content?view=aspnet-mvc-5.2): trả về kiểu trả về dữ liệu kiểu `ContentResult`, về cơ bản là trả về giá trị chuỗi.
+- [**`Content()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.content?view=aspnet-mvc-5.2): trả về kiểu dữ liệu `ContentResult`, về cơ bản là trả về giá trị chuỗi.
 
 **Ví dụ:**
 
