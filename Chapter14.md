@@ -86,30 +86,47 @@ Ta cũng có thể dùng Route để chỉ định đường dẫn cùng các th
     xhttp.open('GET', '/tong/15/10');
 ```
 
-Các Action thông thường sẽ trả về kiểu `string` để xử lý và có thể nhúng nội dung vào giao diện hiện tại mà không cần tải trang.
+Action dùng cho AJAX có thể vẫn trả về kiểu `IActionResult`, tuy nhiên phương thức `View()` lại không thường được sử dụng, thay vào đó là các phương thức sau:
 
-Tuy nhiên nếu như vì một lý do nào đó mà không thể trả về kiểu `string` mà phải là `IActionResult`, hãy sử dụng phương thức `Content()`.
-
-```cs
-    ContentResult Content(string content)
-```
+- [**`Content()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.content?view=aspnet-mvc-5.2): trả về kiểu trả về dữ liệu kiểu `ContentResult`, về cơ bản là trả về giá trị chuỗi.
 
 **Ví dụ:**
 
 ```cs
-    public IActionResult GenerateRandom()
+    public IActionResult Action()
     {
-        if ( /* condition */ )
-            return Content(new Random().Next() + "<br />");
-        else // do something or redirect to somewhere ...
+        return Content("Content will be returned");
     }
 ```
 
-Phương thức `Content()` trả về kiểu dữ liệu `ContentResult` – một lớp dẫn xuất của `IActionResult`.
+- [**`Json()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.json?view=aspnet-mvc-5.2): trả về giá trị `JsonResult`, dữ liệu trả về với định dạng Json. Đối với trình duyệt (ở đây đang đề cập đến AJAX), dữ liệu mà phương thức `Json()` vẫn là dạng chuỗi, cần phải chuyển đổi về dạng JavaScript Object bằng phương thức `JSON.parse()`. Tham số đầu kiểu `object` có thể nhận đối tượng ẩn danh (Anonymous Object).
 
-Dữ liệu mà thuộc tính `responseText` nhận được cũng có thể là **JSON** (JavaScript Object Notation) – một dạng định dạng dữ liệu dạng chuỗi. Ta sẽ sử dụng phương thức `Json()` để phản hồi chuỗi Json đến AJAX và xử lý.
+**Ví dụ:**
 
-> Xem chi tiết về phương thức `Json()` tại: [**Controller.Json method**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.json?view=aspnet-mvc-5.2)
+```cs
+    public IActionResult Action()
+    {
+        return Json(new { status = true, data = "The responsed data" });
+    }
+    /*
+        Chuỗi Json trả về cho trình duyệt:
+        {
+            status: true,
+            data: "The responsed data"
+        }
+    */
+```
+
+- [**`PartialView()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.partialview?view=aspnet-mvc-5.2): trả về một phần của giao diện (partial view) dưới dạng chuỗi HTML.
+
+**Ví dụ:**
+
+```cs
+    public IActionResult Action()
+    {
+        return PartialView("_pvInfo");
+    }
+```
 
 Một định dạng dữ liệu khác mà AJAX có thể nhận lấy là **XML**, thông qua thuộc tính `responseXML` (Nội dung về XML sẽ không được đề cập tại đây).
 
