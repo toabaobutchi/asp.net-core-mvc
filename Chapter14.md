@@ -99,7 +99,7 @@ Action dùng cho AJAX có thể vẫn trả về kiểu `IActionResult`, tuy nhi
     }
 ```
 
-- [**`Json()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.json?view=aspnet-mvc-5.2): trả về giá trị `JsonResult`, dữ liệu trả về với định dạng Json. Đối với trình duyệt (ở đây đang đề cập đến AJAX), dữ liệu mà phương thức `Json()` vẫn là dạng chuỗi, cần phải chuyển đổi về dạng JavaScript Object bằng phương thức `JSON.parse()`. Tham số đầu kiểu `object` có thể nhận đối tượng ẩn danh (Anonymous Object).
+- [**`Json()`**](https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.controller.json?view=aspnet-mvc-5.2): trả về giá trị `JsonResult`, dữ liệu trả về với định dạng Json. Đối với trình duyệt (ở đây đang đề cập đến AJAX), dữ liệu mà phương thức `Json()` phản hồi vẫn là dạng chuỗi, cần phải chuyển đổi về dạng JavaScript Object bằng phương thức `JSON.parse()`. Tham số đầu kiểu `object` có thể nhận đối tượng ẩn danh (Anonymous Object).
 
 **Ví dụ:**
 
