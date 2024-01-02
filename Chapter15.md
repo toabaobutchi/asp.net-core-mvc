@@ -8,6 +8,7 @@ ASP.NET Core duy trì các trạng thái của Session bằng cách cung cấp C
 ## Cấu hình Session
 
 Để sử dụng session trong ASP.NET Core, ta cần cài đặt gói `Microsoft.AspNetCore.Session`.
+
 Tuy nhiên, ở **.NET 6** thì gói `Microsoft.AspNetCore.Session` được ngầm định thêm vào trong dự án và cung cấp một Middleware quản lý trạng thái của session. Ta sẽ thực hiện cấu hình sử dụng session trong file `Program.cs` như sau:
 
 ```cs
